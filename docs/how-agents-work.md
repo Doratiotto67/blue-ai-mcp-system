@@ -1,10 +1,10 @@
-# 🤖 Como Funcionam os Agentes - Sistema Multi-Agente Blue AI
+# 🤖 How the Agents Work - Blue AI Multi-Agent System
 
-## 📋 Visão Geral
+## 📋 Overview
 
-O Sistema Multi-Agente Blue AI é uma arquitetura distribuída baseada no **Model Context Protocol (MCP)** que implementa agentes especializados para diferentes fases do ciclo de desenvolvimento de software. Cada agente possui responsabilidades específicas e trabalha de forma coordenada sob o comando do **Orchestrator Agent**.
+The Blue AI Multi-Agent System is a distributed architecture based on the **Model Context Protocol (MCP)** that implements specialized agents for different phases of the software development lifecycle. Each agent has specific responsibilities and works in a coordinated manner under the command of the **Orchestrator Agent**.
 
-## 🏗️ Arquitetura do Sistema
+## 🏗️ System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -42,88 +42,88 @@ O Sistema Multi-Agente Blue AI é uma arquitetura distribuída baseada no **Mode
                        └─────────────────────────┘
 ```
 
-## 🧠 Componentes Principais
+## 🧠 Core Components
 
-### 1. Orchestrator Agent (Porta 9080)
-**Função**: Maestro do sistema, coordena todos os outros agentes
-- **Responsabilidades**:
-  - Receber requisições do cliente via stdio MCP
-  - Orquestrar o pipeline completo de desenvolvimento
-  - Gerenciar comunicação entre agentes via HTTP
-  - Consolidar resultados e métricas
+### 1. Orchestrator Agent (Port 9080)
+**Function**: System maestro, coordinates all other agents
+- **Responsibilities**:
+  - Receive requests from the client via stdio MCP
+  - Orchestrate the complete development pipeline
+  - Manage inter-agent communication via HTTP
+  - Consolidate results and metrics
 
-- **Tools Principais**:
-  - `build_feature()`: Pipeline completo de desenvolvimento
-  - `quick_code()`: Geração rápida de código
-  - `research_stack()`: Pesquisa de bibliotecas
+- **Main Tools**:
+  - `build_feature()`: Full development pipeline
+  - `quick_code()`: Quick code generation
+  - `research_stack()`: Library research
 
-### 2. Architect Agent (Porta 9081)
-**Função**: Design de arquitetura de sistemas
-- **Responsabilidades**:
-  - Propor arquitetura backend/frontend
-  - Definir módulos, APIs, models e services
-  - Identificar pontos de integração
-  - Analisar trade-offs arquiteturais
+### 2. Architect Agent (Port 9081)
+**Function**: System architecture design
+- **Responsibilities**:
+  - Propose backend/frontend architecture
+  - Define modules, APIs, models, and services
+  - Identify integration points
+  - Analyze architectural trade-offs
 
-- **Tools Principais**:
-  - `propose_architecture()`: Cria arquitetura completa
-  - `refine_architecture()`: Refina arquitetura baseada em feedback
+- **Main Tools**:
+  - `propose_architecture()`: Creates a complete architecture
+  - `refine_architecture()`: Refines architecture based on feedback
 
-### 3. Designer/UIX Agent (Porta 9082)
-**Função**: Design de interfaces e experiência do usuário
-- **Responsabilidades**:
-  - Criar design systems e tokens
-  - Definir layouts e componentes
-  - Garantir acessibilidade e responsividade
-  - Gerar componentes React/TypeScript
+### 3. Designer/UIX Agent (Port 9082)
+**Function**: User interface and user experience design
+- **Responsibilities**:
+  - Create design systems and tokens
+  - Define layouts and components
+  - Ensure accessibility and responsiveness
+  - Generate React/TypeScript components
 
-- **Tools Principais**:
-  - `design_ui()`: Design completo de interface
-  - `generate_component()`: Gera componentes específicos
-  - `create_design_system()`: Cria sistema de design
+- **Main Tools**:
+  - `design_ui()`: Complete interface design
+  - `generate_component()`: Generates specific components
+  - `create_design_system()`: Creates a design system
 
-### 4. Coder Agent (Porta 9083)
-**Função**: Geração de código limpo e testes
-- **Responsabilidades**:
-  - Implementar código backend (FastAPI) e frontend (React)
-  - Gerar testes unitários e de integração
-  - Refatorar código existente
-  - Seguir best practices de programação
+### 4. Coder Agent (Port 9083)
+**Function**: Clean code and test generation
+- **Responsibilities**:
+  - Implement backend (FastAPI) and frontend (React) code
+  - Generate unit and integration tests
+  - Refactor existing code
+  - Follow programming best practices
 
-- **Tools Principais**:
-  - `generate_code()`: Gera código completo
-  - `refactor_code()`: Refatora código existente
-  - `generate_tests()`: Cria testes automatizados
+- **Main Tools**:
+  - `generate_code()`: Generates complete code
+  - `refactor_code()`: Refactors existing code
+  - `generate_tests()`: Creates automated tests
 
-### 5. Auditor Agent (Porta 9084)
-**Função**: Revisão de código e segurança
-- **Responsabilidades**:
-  - Análise de qualidade de código
-  - Scan de vulnerabilidades de segurança
-  - Validação de imports e dependências
-  - Identificar code smells e anti-padrões
+### 5. Auditor Agent (Port 9084)
+**Function**: Code review and security
+- **Responsibilities**:
+  - Code quality analysis
+  - Security vulnerability scanning
+  - Validation of imports and dependencies
+  - Identify code smells and anti-patterns
 
-- **Tools Principais**:
-  - `review_code()`: Revisão completa de código
-  - `security_scan()`: Análise de segurança OWASP
-  - `validate_imports()`: Validação de dependências
+- **Main Tools**:
+  - `review_code()`: Complete code review
+  - `security_scan()`: OWASP security analysis
+  - `validate_imports()`: Dependency validation
 
-### 6. StackResearch Agent (Porta 9085)
-**Função**: Pesquisa de tecnologias e dependências
-- **Responsabilidades**:
-  - Pesquisar versões atualizadas de bibliotecas
-  - Identificar imports corretos
-  - Verificar compatibilidade entre dependências
-  - Documentar APIs depreciadas
+### 6. StackResearch Agent (Port 9085)
+**Function**: Research of technologies and dependencies
+- **Responsibilities**:
+  - Research updated library versions
+  - Identify correct imports
+  - Check compatibility between dependencies
+  - Document deprecated APIs
 
-- **Tools Principais**:
-  - `get_imports()`: Pesquisa imports de bibliotecas
-  - `get_stack_snapshot()`: Snapshot de múltiplas bibliotecas
-  - `search_best_practice()`: Busca melhores práticas
+- **Main Tools**:
+  - `get_imports()`: Researches library imports
+  - `get_stack_snapshot()`: Snapshot of multiple libraries
+  - `search_best_practice()`: Searches for best practices
 
-## 🔄 Fluxo de Trabalho (Pipeline)
+## 🔄 Workflow (Pipeline)
 
-### Fluxograma do Pipeline Principal
+### Main Pipeline Flowchart
 
 ```mermaid
 graph TD
@@ -146,9 +146,9 @@ graph TD
     M --> N[Cliente]
 ```
 
-### Pipeline Detalhado
+### Detailed Pipeline
 
-#### 1. Fase de Inicialização
+#### 1. Initialization Phase
 ```mermaid
 sequenceDiagram
     participant C as Cliente
@@ -165,7 +165,7 @@ sequenceDiagram
     A->>O: architecture_proposal
 ```
 
-#### 2. Fase de Arquitetura e Stack
+#### 2. Architecture and Stack Phase
 ```mermaid
 sequenceDiagram
     participant O as Orchestrator
@@ -179,7 +179,7 @@ sequenceDiagram
     S->>O: imports_map
 ```
 
-#### 3. Fase de Design e Implementação
+#### 3. Design and Implementation Phase
 ```mermaid
 sequenceDiagram
     participant O as Orchestrator
@@ -193,7 +193,7 @@ sequenceDiagram
     Co->>O: code_response
 ```
 
-#### 4. Fase de Auditoria e Correção
+#### 4. Audit and Correction Phase
 ```mermaid
 sequenceDiagram
     participant O as Orchestrator
@@ -210,15 +210,15 @@ sequenceDiagram
     end
 ```
 
-## 🚀 Como os Agentes se Comunicam
+## 🚀 How Agents Communicate
 
-### Protocolo de Comunicação
+### Communication Protocol
 
-1. **Cliente ↔ Orchestrator**: MCP via stdio (para IDEs)
-2. **Orchestrator ↔ Agentes**: MCP via HTTP (interno)
-3. **Agentes ↔ LLM**: HTTP API (OpenRouter/GLM-4.6)
+1. **Client ↔ Orchestrator**: MCP via stdio (for IDEs)
+2. **Orchestrator ↔ Agents**: MCP via HTTP (internal)
+3. **Agents ↔ LLM**: HTTP API (OpenRouter/GLM-4.6)
 
-### Formato de Mensagens
+### Message Format
 
 ```json
 {
@@ -235,7 +235,7 @@ sequenceDiagram
 }
 ```
 
-### Endpoints HTTP dos Agentes
+### Agent HTTP Endpoints
 
 | Agente | Porta | Endpoints Principais |
 |--------|-------|---------------------|
@@ -246,20 +246,20 @@ sequenceDiagram
 | Auditor | 9084 | `/mcp`, `/health`, `/mcp/tools/call` |
 | Stack Research | 9085 | `/mcp`, `/health`, `/mcp/tools/call` |
 
-## 🧩 Estrutura Interna dos Agentes
+## 🧩 Internal Agent Structure
 
-### Componentes Comuns
+### Common Components
 
 ```mermaid
 graph TB
-    subgraph "Agente MCP"
+    subgraph "MCP Agent"
         A[FastMCP Server]
         B[Tools Registradas]
         C[LLM Router]
         D[HTTP Endpoints]
     end
     
-    subgraph "Infraestrutura"
+    subgraph "Infrastructure"
         E[Docker Container]
         F[Health Check]
         G[Logging]
@@ -275,40 +275,40 @@ graph TB
     E --> H
 ```
 
-### Estrutura de Código dos Agentes
+### Agent Code Structure
 
 ```python
-# Estrutura padrão de todos os agentes
+# Standard structure for all agents
 import json
 from typing import Any, Dict, List
 from starlette.applications import Starlette
 from mcp.server.fastmcp import FastMCP
 from llm_router import LLMRouter, Message
 
-# Inicialização
-mcp = FastMCP("NomeDoAgente")
+# Initialization
+mcp = FastMCP("AgentName")
 router = LLMRouter()
 
 @mcp.tool()
 async def tool_principal(param1: str, param2: dict) -> dict:
-    """Implementação da ferramenta principal"""
-    # Lógica específica do agente
+    """Main tool implementation"""
+    # Agent-specific logic
     result = await router.call_glm46(messages)
     return result
 
-# Configuração HTTP
+# HTTP Configuration
 app = mcp.streamable_http_app()
 app.add_route("/health", health_endpoint, methods=["GET"])
 app.add_route("/mcp/tools/call", call_tool_endpoint, methods=["POST"])
 ```
 
-## 📊 Gerenciamento de Estado e Contexto
+## 📊 State and Context Management
 
-### Fluxo de Dados entre Agentes
+### Data Flow Between Agents
 
 ```mermaid
 graph LR
-    A[Spec Inicial] --> B[Architecture]
+    A[Initial Spec] --> B[Architecture]
     B --> C[Imports Map]
     C --> D[UI Design]
     D --> E[Code Generated]
@@ -319,42 +319,42 @@ graph LR
     style G fill:#c8e6c9
 ```
 
-### Estrutura de Dados Compartilhados
+### Shared Data Structure
 
 ```typescript
 interface PipelineContext {
-  spec: string;                    // Especificação original
-  architecture: ArchitectureSpec;  // Saída do Architect
-  imports: ImportMap;              // Saída do Stack Research
-  ui_design: UIDesignSpec;         // Saída do Designer
-  code: CodeSpec;                  // Saída do Coder
-  review: ReviewSpec;              // Saída do Auditor
-  metrics: PipelineMetrics;        // Métricas de execução
+  spec: string;                    // Original specification
+  architecture: ArchitectureSpec;  // Output from Architect
+  imports: ImportMap;              // Output from Stack Research
+  ui_design: UIDesignSpec;         // Output from Designer
+  code: CodeSpec;                  // Output from Coder
+  review: ReviewSpec;              // Output from Auditor
+  metrics: PipelineMetrics;        // Execution metrics
 }
 ```
 
-## 🛡️ Mecanismos de Segurança
+## 🛡️ Security Mechanisms
 
-### 1. Isolamento de Rede
-- Agentes executam em containers Docker isolados
-- Comunicação interna via network Docker dedicada
-- Sem exposição direta à internet
+### 1. Network Isolation
+- Agents run in isolated Docker containers
+- Internal communication via a dedicated Docker network
+- No direct exposure to the internet
 
-### 2. Validação de Entrada
-- Todos os agentes validam parâmetros de entrada
-- Sanitização de código malicioso
-- Mascaramento de dados sensíveis
+### 2. Input Validation
+- All agents validate input parameters
+- Malicious code sanitization
+- Sensitive data masking
 
-### 3. Gestão de Segredos
-- API keys armazenadas em variáveis de ambiente
-- Nunca expostas em logs ou respostas
-- Rotação automática de chaves
+### 3. Secret Management
+- API keys stored in environment variables
+- Never exposed in logs or responses
+- Automatic key rotation
 
-## 📈 Monitoramento e Observabilidade
+## 📈 Monitoring and Observability
 
 ### Health Checks
 ```yaml
-# Configuração no docker-compose.yml
+# Configuration in docker-compose.yml
 healthcheck:
   test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
   interval: 30s
@@ -362,14 +362,14 @@ healthcheck:
   retries: 3
 ```
 
-### Métricas Coletadas
-- Tempo de resposta por agente
-- Taxa de sucesso das ferramentas
-- Número de retries por chamada
-- Consumo de tokens dos LLMs
-- Status de saúde dos containers
+### Collected Metrics
+- Response time per agent
+- Tool success rate
+- Number of retries per call
+- LLM token consumption
+- Container health status
 
-### Estrutura de Logs
+### Log Structure
 ```json
 {
   "timestamp": "2025-01-01T00:00:00Z",
@@ -384,50 +384,50 @@ healthcheck:
 }
 ```
 
-## 🔄 Tratamento de Erros e Recuperação
+## 🔄 Error Handling and Recovery
 
-### Estratégia de Retry
+### Retry Strategy
 ```python
 @_retry_on_failure(max_attempts=3)
 async def call_agent_with_retry(agent_url, tool_name, arguments):
-    """Implementação com retry exponencial"""
-    # Tentativa 1: imediata
-    # Tentativa 2: após 2s
-    # Tentativa 3: após 4s
+    """Implementation with exponential backoff"""
+    # Attempt 1: immediate
+    # Attempt 2: after 2s
+    # Attempt 3: after 4s
 ```
 
-### Fluxo de Recuperação
+### Recovery Flow
 
 ```mermaid
 graph TD
-    A[Falha no Agente] --> B{Retry < 3?}
-    B -->|Sim| C[Espera Exponencial]
-    C --> D[Nova Tentativa]
-    D --> E{Sucesso?}
-    E -->|Sim| F[Continua Pipeline]
-    E -->|Não| A
-    B -->|Não| G[Registra Incidente]
-    G --> H{Crítico?}
-    H -->|Sim| I[Aborta Pipeline]
-    H -->|Não| J[Continua Parcial]
+    A[Agent Failure] --> B{Retry < 3?}
+    B -->|Yes| C[Exponential Backoff]
+    C --> D[New Attempt]
+    D --> E{Success?}
+    E -->|Yes| F[Continue Pipeline]
+    E -->|No| A
+    B -->|No| G[Log Incident]
+    G --> H{Critical?}
+    H -->|Yes| I[Abort Pipeline]
+    H -->|No| J[Continue Partially]
 ```
 
-## 🚀 Exemplo Prático: Implementação de Autenticação
+## 🚀 Practical Example: Authentication Implementation
 
-### 1. Requisição Inicial
+### 1. Initial Request
 ```bash
-# Cliente envia para o Orchestrator
+# Client sends to the Orchestrator
 build_feature(
-  spec="Sistema de autenticação com JWT e 2FA",
+  spec="Authentication system with JWT and 2FA",
   context="React frontend, FastAPI backend"
 )
 ```
 
-### 2. Pipeline em Execução
+### 2. Pipeline in Execution
 
 ```mermaid
 sequenceDiagram
-    participant C as Cliente
+    participant C as Client
     participant O as Orchestrator
     participant A as Architect
     participant S as Stack
@@ -460,7 +460,7 @@ sequenceDiagram
     O->>C: consolidated_result
 ```
 
-### 3. Resultado Final
+### 3. Final Result
 ```json
 {
   "architecture": {
@@ -496,11 +496,11 @@ sequenceDiagram
 }
 ```
 
-## 🔧 Configuração e Deploy
+## 🔧 Configuration and Deployment
 
 ### Docker Compose
 ```yaml
-# Cada agente como serviço independente
+# Each agent as an independent service
 services:
   orchestrator:
     build: docker/Dockerfile.orchestrator
@@ -517,7 +517,7 @@ services:
           memory: 512M
 ```
 
-### Configuração MCP para IDEs
+### MCP Configuration for IDEs
 ```json
 // Claude Desktop
 {
@@ -533,36 +533,36 @@ services:
 }
 ```
 
-## 📚 Melhores Práticas
+## 📚 Best Practices
 
-### 1. Para Desenvolvedores
-- Manter agents stateless
-- Implementar timeouts adequados
-- Usar structured logging
-- Validar rigorosamente entradas
+### 1. For Developers
+- Keep agents stateless
+- Implement appropriate timeouts
+- Use structured logging
+- Strictly validate inputs
 
-### 2. Para Operações
-- Monitorar health checks
-- Configurar alertas automáticos
-- Manter backups de configuração
-- Documentar incidentes
+### 2. For Operations
+- Monitor health checks
+- Set up automatic alerts
+- Maintain configuration backups
+- Document incidents
 
-### 3. Para Usuários
-- Fornecer specs detalhadas
-- Incluir contexto relevante
-- Revisar outputs cuidadosamente
-- Reportar anomalias
+### 3. For Users
+- Provide detailed specs
+- Include relevant context
+- Carefully review outputs
+- Report anomalies
 
-## 🔮 Evolução Futura
+## 🔮 Future Evolution
 
-### Roadmap Planejado
-1. **Expansão de Agentes**: Database, DevOps, QA
-2. **Melhorias de LLM**: Integração com modelos mais recentes
-3. **Interface Web**: Dashboard de monitoramento
-4. **Autoscaling**: Escalonamento dinâmico baseado em carga
-5. **Multi-tenant**: Isolamento entre projetos
+### Planned Roadmap
+1. **Agent Expansion**: Database, DevOps, QA
+2. **LLM Improvements**: Integration with newer models
+3. **Web Interface**: Monitoring dashboard
+4. **Autoscaling**: Dynamic scaling based on load
+5. **Multi-tenancy**: Isolation between projects
 
-### Arquitetura Alvo
+### Target Architecture
 ```mermaid
 graph TB
     subgraph "Future Architecture"
@@ -581,14 +581,14 @@ graph TB
 
 ---
 
-## 📖 Conclusão
+## 📖 Conclusion
 
-O Sistema Multi-Agente Blue AI representa uma abordagem moderna e escalável para desenvolvimento de software, combinando:
+The Blue AI Multi-Agent System represents a modern and scalable approach to software development, combining:
 
-- **Especialização**: Cada agente foca em sua área de expertise
-- **Orquestração**: Coordenação inteligente via Orchestrator
-- **Padronização**: Protocolo MCP para comunicação consistente
-- **Observabilidade**: Monitoramento completo e métricas detalhadas
-- **Recuperação**: Robustez com retries e fallbacks
+- **Specialization**: Each agent focuses on its area of expertise
+- **Orchestration**: Intelligent coordination via the Orchestrator
+- **Standardization**: MCP protocol for consistent communication
+- **Observability**: Complete monitoring and detailed metrics
+- **Recovery**: Robustness with retries and fallbacks
 
-Esta arquitetura permite transformar requisitos de negócio em código production-ready de forma automatizada, auditável e escalável.
+This architecture allows for the automated, auditable, and scalable transformation of business requirements into production-ready code.

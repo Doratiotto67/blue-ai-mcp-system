@@ -1,17 +1,17 @@
 # 🚀 Blue AI Multi-Agent MCP System
 
-Sistema multi-agente enterprise baseado em MCP (Model Context Protocol) com orquestração inteligente usando GLM-4.6 + Gemini 2.5 Flash.
+Enterprise multi-agent system based on MCP (Model Context Protocol) with intelligent orchestration using GLM-4.6.
 
-## 📋 Visão Geral
+## 📋 Overview
 
-Esta arquitetura implementa um sistema distribuído de agentes especializados que trabalham em conjunto para:
-- ✅ Analisar requisitos e propor arquiteturas
-- ✅ Design de interfaces modernas e responsivas  
-- ✅ Gerar código limpo e seguindo best practices
-- ✅ Auditar código para segurança e qualidade
-- ✅ Research de stacks e dependências atualizadas
+This architecture implements a distributed system of specialized agents that work together to:
+- ✅ Analyze requirements and propose architectures
+- ✅ Design modern and responsive interfaces  
+- ✅ Generate clean code following best practices
+- ✅ Audit code for security and quality
+- ✅ Research updated stacks and dependencies
 
-## 🏗️ Arquitetura
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -24,7 +24,7 @@ Esta arquitetura implementa um sistema distribuído de agentes especializados qu
 │              BLUE ORCHESTRATOR (Container)                       │
 │                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐  │
-│  │  LLM Router: GLM-4.6 (reasoning) + Gemini 2.5 (struct)  │  │
+│  │  LLM Router: GLM-4.6 (Reasoning & Structured Output)    │  │
 │  └──────────────────────────────────────────────────────────┘  │
 │                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐  │
@@ -35,119 +35,105 @@ Esta arquitetura implementa um sistema distribuído de agentes especializados qu
           ┌──────────────────┼──────────────────┬─────────────────┐
           │                  │                  │                 │
           ▼                  ▼                  ▼                 ▼
-┌──────────────────┐ ┌──────────────┐ ┌──────────────┐ ┌─────────────────┐
-│ Architect Agent  │ │ Designer/UIX │ │ Coder Agent  │ │ Auditor Agent   │
-│  (MCP Server)    │ │ Agent (MCP)  │ │  (MCP Server)│ │  (MCP Server)   │
-└──────────────────┘ └──────────────┘ └──────────────┘ └─────────────────┘
+┌──────────────────┐ ┌──────────────┐ ┌──────────────┐ ┌─────────────────┐ ┌──────────────┐
+│ Architect Agent  │ │ Designer/UIX │ │ Coder Agent  │ │ Auditor Agent   │ │ Memory Agent │
+│  (MCP Server)    │ │ Agent (MCP)  │ │  (MCP Server)│ │  (MCP Server)   │ │  (MCP Server)│
+└──────────────────┘ └──────────────┘ └──────────────┘ └─────────────────┘ └──────────────┘
           │                  │                  │                 │
           └──────────────────┴──────────────────┴─────────────────┘
                                    │
                                    ▼
                       ┌─────────────────────────┐
                       │StackResearch Agent (MCP)│
-                      │  Gemini 2.5 Flash Core  │
                       └─────────────────────────┘
 ```
 
-## 🧠 Dual-LLM Strategy
+## 🚀 Quick Install
 
-| Tarefa | Modelo Primário | Modelo Secundário | Justificativa |
-|--------|----------------|-------------------|---------------|
-| Orquestração & Planning | GLM-4.6 | Gemini (summary) | Reasoning complexo + tool calling |
-| Codegen Backend/Frontend | GLM-4.6 | - | Superior code quality |
-| Auditoria de Código | GLM-4.6 | Gemini (JSON output) | Deep analysis + structured report |
-| Research de Stack | Gemini 2.5 Flash | - | Structured outputs + speed |
-| Arquitetura de Sistema | GLM-4.6 | Gemini (normalize) | Reasoning + JSON schema |
-| UI/UX Design | GLM-4.6 | Gemini (multimodal) | Code + interpret mockups |
-| Import/Version Mapping | Gemini 2.5 Flash | - | Fast + structured |
-
-## 🚀 Instalação Rápida
-
-### 1. Clone e Configure
+### 1. Clone and Configure
 
 ```bash
 git clone <repository>
 cd blue-ai-mcp-system
 cp .env.example .env
-# Edite .env com suas API keys
+# Edit .env with your API keys
 ```
 
-### 2. Configure as API Keys
+### 2. Configure API Keys
 
 ```bash
 # .env file
 OPENROUTER_API_KEY=your_openrouter_key_here
-GEMINI_API_KEY=your_gemini_key_here
 LOG_LEVEL=INFO
 ```
 
-### 3. Build e Inicie
+### 3. Build and Start
 
 ```bash
-# Build das imagens Docker
+# Build the Docker images
 docker-compose build
 
-# Inicie o sistema
+# Start the system
 docker-compose up -d
 
-# Verifique os logs
+# Check the logs
 docker-compose logs -f
 ```
 
-### 4. Configure sua IDE
+### 4. Configure Your IDE
 
 #### Claude Desktop
 ```bash
-# Copie a configuração para o Claude Desktop
+# Copy the configuration to Claude Desktop
 cp config/claude-desktop-mcp.json ~/.config/claude-desktop/mcp_config.json
-# Ou manualmente adicione ao arquivo existente
+# Or manually add to the existing file
 ```
 
 #### Cursor
 ```bash
-# Copie a configuração para o Cursor
+# Copy the configuration to Cursor
 cp config/cursor-mcp.json ~/.cursor/mcp.json
-# Ou manualmente adicione ao arquivo existente
+# Or manually add to the existing file
 ```
 
 #### VS Code
 ```bash
-# Instale a extensão MCP Server
-# Copie a configuração para as settings do VS Code
+# Install the MCP Server extension
+# Copy the configuration to VS Code settings
 cp config/vscode-mcp.json ~/.vscode/settings.json
-# Ou manualmente adicione ao arquivo existente
+# Or manually add to the existing file
 ```
 
-## 🛠️ Agentes Disponíveis
+## 🛠️ Available Agents
 
 ### Orchestrator Agent
-- **Função**: Coordenação do pipeline completo
-- **Porta**: 8080
+- **Function**: Full pipeline coordination
+- **Port**: 9080
 - **Tools**: `build_feature`, `quick_code`, `research_stack`
 
 ### Architect Agent  
-- **Função**: Design de arquitetura backend/frontend
-- **Porta**: 8081
+- **Function**: Backend/frontend architecture design
+- **Port**: 9081
 - **Tools**: `propose_architecture`, `refine_architecture`
 
 ### Designer/UIX Agent
-- **Função**: Design de interfaces e UX
-- **Porta**: 8082
+- **Function**: UI and UX design
+- **Port**: 9082
 - **Tools**: `design_ui`, `generate_component`, `create_design_system`
 
 ### Coder Agent
-- **Função**: Geração de código limpo
-- **Porta**: 8083
+- **Function**: Clean code generation
+- **Port**: 9083
 - **Tools**: `generate_code`, `refactor_code`, `generate_tests`
 
 ### Auditor Agent
-- **Função**: Revisão de código e segurança
-- **Porta**: 8084
+- **Function**: Code review and security
+- **Port**: 9084
 - **Tools**: `review_code`, `security_scan`, `validate_imports`
 
 ### StackResearch Agent
-- **Função**: Research de tecnologias e dependências
-- **Porta**: 8085
+- **Function**: Technology and dependency research
+- **Port**: 9085
 - **Tools**: `get_imports`, `get_stack_snapshot`, `search_best_practice`
 
 ## 💻 Uso
@@ -279,7 +265,7 @@ docker-compose up -d
 
 - [MCP Protocol](https://modelcontextprotocol.io/)
 - [GLM-4.6 Docs](https://openrouter.ai/)
-- [Gemini 2.5 Flash](https://ai.google.dev/)
+
 - [FastMCP](https://github.com/jlowin/fastmcp)
 
 ## 🤝 Contribuindo

@@ -1,33 +1,33 @@
-# Memory Agent - Guia Completo
+# Memory Agent - Complete Guide
 
 ## Overview
 
-O Memory Agent é o componente de memória de longo prazo do sistema Blue AI. Ele armazena experiências de erro/aprendizado e fornece lições aprendidas para evitar repetição de problemas.
+The Memory Agent is the long-term memory component of the Blue AI system. It stores error/learning experiences and provides learned lessons to avoid repeating problems.
 
-## Arquitetura
+## Architecture
 
-### Componentes Principais
+### Main Components
 
 1. **Models (`models.py`)**
-   - `Experience`: Armazena experiências de erro/correção
-   - `Lesson`: Lições aprendidas extraídas
-   - `LessonsBundle`: Conjunto de lições organizadas
-   - `MemoryStats`: Estatísticas do sistema
+   - `Experience`: Stores error/fix experiences
+   - `Lesson`: Extracted learned lessons
+   - `LessonsBundle`: Set of organized lessons
+   - `MemoryStats`: System statistics
 
 2. **Memory Store (`app.py`)**
-   - Armazenamento em memória (substituível por Postgres/pgvector)
-   - Deduplicação automática de experiências
-   - Pruning de memórias antigas
-   - Consolidação de lições similares
+   - In-memory storage (replaceable by Postgres/pgvector)
+   - Automatic deduplication of experiences
+   - Pruning of old memories
+   - Consolidation of similar lessons
 
 3. **Integration**
-   - Integrado ao Orchestrator via MCP
-   - Usa Qwen3-235B para processamento de texto
-   - Cache inteligente de consultas
+   - Integrated with the Orchestrator via MCP
+   - Uses Qwen3-235B for text processing
+   - Smart query caching
 
-## Funcionalidades
+## Features
 
-### 1. Armazenamento de Experiências
+### 1. Storing Experiences
 
 ```python
 experience = {
@@ -46,7 +46,7 @@ experience = {
 }
 ```
 
-### 2. Recuperação de Lições Aprendidas
+### 2. Retrieving Learned Lessons
 
 ```python
 lessons = await memory_agent.lessons_for_task(
@@ -56,87 +56,87 @@ lessons = await memory_agent.lessons_for_task(
 )
 ```
 
-Retorna:
-- **High-level rules**: Regras de arquitetura
-- **Code smells to avoid**: Padrões de código ruins
-- **Security pitfalls**: Armadilhas de segurança
-- **Performance tips**: Dicas de performance
+Returns:
+- **High-level rules**: Architectural rules
+- **Code smells to avoid**: Bad code patterns
+- **Security pitfalls**: Security traps
+- **Performance tips**: Performance tips
 
-### 3. Deduplicação Automática
+### 3. Automatic Deduplication
 
-O sistema identifica experiências duplicadas ou muito similares:
-- Calcula hash do conteúdo
-- Compara similaridade textual (Jaccard)
-- Mantém a experiência mais recente/severa
-- Remove duplicatas automaticamente
+The system identifies duplicate or very similar experiences:
+- Calculates content hash
+- Compares text similarity (Jaccard)
+- Keeps the most recent/severe experience
+- Automatically removes duplicates
 
-### 4. Pruning de Memórias
+### 4. Memory Pruning
 
-Remove experiências antigas de baixa severidade:
-- **Critical/High**: Mantidas forever
-- **Medium**: Removidas após 90 dias
-- **Low**: Removidas após 90 dias
-- Configurável via parâmetro
+Removes old, low-severity experiences:
+- **Critical/High**: Kept forever
+- **Medium**: Removed after 90 days
+- **Low**: Removed after 90 days
+- Configurable via parameter
 
-### 5. Consolidação de Lições
+### 5. Lesson Consolidation
 
-Agrupa lições similares em meta-regras:
-- Identifica padrões repetitivos
-- Gera regras consolidadas
-- Calcula confiança baseada na frequência
-- Reduz ruído no conhecimento
+Groups similar lessons into meta-rules:
+- Identifies repetitive patterns
+- Generates consolidated rules
+- Calculates confidence based on frequency
+- Reduces knowledge noise
 
-## Integração com LLMs
+## LLM Integration
 
-### Modelo Especializado
+### Specialized Model
 
-O Memory Agent usa **Qwen3-235B** para:
-- Processar texto de experiências
-- Gerar lições estruturadas
-- Consolidar padrões similares
-- Extrair regras práticas
+The Memory Agent uses **Qwen3-235B** to:
+- Process text from experiences
+- Generate structured lessons
+- Consolidate similar patterns
+- Extract practical rules
 
-### Fallback Inteligente
+### Smart Fallback
 
-Se Qwen3 falhar, fallback para:
-1. **GLM-4.5-Air**: Para estruturação
-2. **DeepSeek-V3.1**: Para análise crítica
+If Qwen3 fails, it falls back to:
+1. **GLM-4.5-Air**: For structuring
+2. **DeepSeek-V3.1**: For critical analysis
 
-## API MCP
+## MCP API
 
-## Endpoints HTTP
-- `GET /health` — status do agente
-- `POST /tools/call` — executa tools direto por HTTP
-- `POST /mcp/tools/call` — alias compatível com MCP
-- `POST /mcp` — executa tool via payload `{ tool_name, arguments }`
+## HTTP Endpoints
+- `GET /health` — agent status
+- `POST /tools/call` — execute tools directly via HTTP
+- `POST /mcp/tools/call` — MCP-compatible alias
+- `POST /mcp` — execute tool via payload `{ tool_name, arguments }`
 
-### Formato de Chamada
-- `POST /tools/call` ou `/mcp/tools/call`
+### Call Format
+- `POST /tools/call` or `/mcp/tools/call`
   - Body: `{ "tool_name": "memory_stats", "arguments": {} }`
 - `POST /mcp`
   - Body: `{ "tool_name": "memory_stats", "arguments": {} }`
 
-Observação: para `store_experience` use `{ "tool_name": "store_experience", "arguments": { ...exp... } }` e para `remember_decision` use `{ "tool_name": "remember_decision", "arguments": { ...decision... } }`.
+Note: for `store_experience` use `{ "tool_name": "store_experience", "arguments": { ...exp... } }` and for `remember_decision` use `{ "tool_name": "remember_decision", "arguments": { ...decision... } }`.
 
-### Tools Principais
+### Main Tools
 
 #### `store_experience(exp: Experience) -> str`
-Armazena uma nova experiência.
+Stores a new experience.
 
 #### `lessons_for_task(spec, stack, limit) -> LessonsBundle`
-Recupera lições relevantes para uma tarefa.
+Retrieves relevant lessons for a task.
 
 #### `memory_stats() -> MemoryStats`
-Retorna estatísticas do sistema.
+Returns system statistics.
 
 #### `deduplicate_experiences() -> DeduplicationResult`
-Remove experiências duplicadas.
+Removes duplicate experiences.
 
 #### `prune_stale_memories(cutoff_days) -> PruningResult`
-Remove experiências antigas.
+Removes old experiences.
 
 #### `consolidate_lessons() -> List[ConsolidatedLesson]`
-Agrupa lições similares.
+Groups similar lessons.
 
 ## Uso no Orchestrator
 
@@ -192,7 +192,7 @@ arch_result = await agents.call_agent(
 ### Variáveis de Ambiente
 
 ```bash
-OPENROUTER_API_KEY=sua-chave-aqui
+OPENROUTER_API_KEY=your-key-here
 LOG_LEVEL=INFO
 ```
 
@@ -261,36 +261,36 @@ memory-agent:
 
 ### Problemas Comuns
 
-1. **Memory Agent não responde**
-   - Verifique se o container está rodando
-   - Confirme a porta 9086 está acessível
-   - Teste health check: `curl localhost:9086/health`
+1. **Memory Agent not responding**
+   - Check if the container is running
+   - Confirm port 9086 is accessible
+   - Test health check: `curl localhost:9086/health`
 
-2. **Lições não são recuperadas**
-   - Verifique se há experiências armazenadas
-   - Confirme se a spec e stack estão corretas
-   - Teste com diferentes filtros
+2. **Lessons are not retrieved**
+   - Check if experiences are stored
+   - Confirm if spec and stack are correct
+   - Test with different filters
 
-3. **Deduplicação não funciona**
-   - Verifique similaridade threshold
-   - Confirme formato das experiências
-   - Revise logs de erros
+3. **Deduplication not working**
+   - Check similarity threshold
+   - Confirm experience format
+   - Review error logs
 
 ### Debug
 
 ```bash
-# Ver logs do container
+# View container logs
 docker logs memory-agent
 
-# Testar health check
+# Test health check
 curl http://localhost:9086/health
 
-# Ver estatísticas
+# View statistics
 curl -X POST http://localhost:9086/tools/call \
   -H "Content-Type: application/json" \
   -d '{"tool_name": "memory_stats", "arguments": {}}'
 
-# Via orquestrador
+# Via orchestrator
 curl -X POST http://localhost:9080/mcp/tools/call \
   -H "Content-Type: application/json" \
   -d '{"tool_name": "get_memory_stats", "arguments": {}}'
@@ -299,7 +299,7 @@ curl -X POST http://localhost:9080/mcp/tools/call \
 ## Exemplo Completo
 
 ```python
-# 1. Armazenar experiência de segurança
+# 1. Store security experience
 experience = {
     "project_id": "my-app",
     "module": "auth",
@@ -312,18 +312,18 @@ experience = {
     "tags": ["security", "sql", "injection"]
 }
 
-# 2. Recuperar lições para nova feature
+# 2. Retrieve lessons for new feature
 lessons = await memory_agent.lessons_for_task(
     spec="Create admin dashboard with user management",
     stack="python+fastapi+postgres+react"
 )
 
-# 3. Aplicar lições no desenvolvimento
+# 3. Apply lessons in development
 for rule in lessons.get("high_level_rules", []):
     print(f"Rule: {rule['rule']}")
     print(f"Why: {rule['rationale']}")
 
-# 4. Armazenar decisão arquitetônica
+# 4. Store architectural decision
 decision = {
     "project_id": "my-app",
     "module": "admin",
@@ -333,4 +333,4 @@ decision = {
 }
 ```
 
-Este guia cobre todos os aspectos do Memory Agent. Para dúvidas adicionais, consulte os logs ou a equipe de desenvolvimento.
+This guide covers all aspects of the Memory Agent. For additional questions, consult the logs or the development team.
