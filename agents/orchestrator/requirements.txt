@@ -1,0 +1,2 @@
+-r ../common/requirements-base.txt
+fastmcp>=0.1.0

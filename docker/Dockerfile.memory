@@ -1,0 +1,19 @@
+FROM blue-ai-base:latest
+
+WORKDIR /app
+
+COPY agents/memory/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY agents/memory/ ./agents/memory/
+COPY agents/common/ ./agents/common/
+
+RUN mkdir -p /app/logs
+
+USER mcpuser
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+CMD ["python", "-m", "uvicorn", "agents.memory.app:app", "--host", "0.0.0.0", "--port", "8080"]

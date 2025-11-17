@@ -1,0 +1,21 @@
+{
+  "mcp": {
+    "servers": {
+      "blue-orchestrator": {
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-i",
+          "--network=blue_ai_default",
+          "--env=OPENROUTER_API_KEY",
+          "--env=LOG_LEVEL=INFO",
+          "myorg/blue-orchestrator:latest"
+        ],
+        "env": {
+          "OPENROUTER_API_KEY": "${OPENROUTER_API_KEY}"
+        }
+      }
+    }
+  }
+}

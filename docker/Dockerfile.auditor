@@ -1,0 +1,13 @@
+# Dockerfile.auditor
+FROM blue-ai-base:latest
+
+WORKDIR /app
+
+# Apenas código específico do agente
+COPY agents/auditor/app.py .
+COPY agents/common/llm_router.py .
+
+ENV PORT=8080
+EXPOSE 8080
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]

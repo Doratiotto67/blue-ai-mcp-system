@@ -1,0 +1,214 @@
+{
+  "mcp_configuration": {
+    "docker_settings": {
+      "host": "localhost",
+      "port": "2376",
+      "api_version": "1.45",
+      "tls_verification": true,
+      "cert_path": "~/.docker/certs",
+      "container_labels": {
+        "mcp.system": "blue-ai-enterprise",
+        "mcp.version": "1.0.0",
+        "mcp.environment": "production"
+      },
+      "restart_policy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 5
+      }
+    },
+    "agent_connections": [
+      {
+        "agent_id": "blue-orchestrator",
+        "endpoint": "http://localhost:9080/mcp",
+        "auth_type": "bearer_token",
+        "credentials": {
+          "username": "orchestrator_service",
+          "password": "${ORCHESTRATOR_PASSWORD}",
+          "token": "${ORCHESTRATOR_TOKEN}"
+        },
+        "health_check": {
+          "endpoint": "http://localhost:9080/health",
+          "interval": 30,
+          "timeout": 5,
+          "retry_attempts": 3
+        },
+        "capabilities": ["coordination", "workflow_management", "agent_communication"]
+      },
+      {
+        "agent_id": "architect-agent",
+        "endpoint": "http://localhost:9081/mcp",
+        "auth_type": "bearer_token",
+        "credentials": {
+          "username": "architect_service",
+          "password": "${ARCHITECT_PASSWORD}",
+          "token": "${ARCHITECT_TOKEN}"
+        },
+        "health_check": {
+          "endpoint": "http://localhost:9081/health",
+          "interval": 30,
+          "timeout": 5,
+          "retry_attempts": 3
+        },
+        "capabilities": ["architecture_design", "dependency_analysis", "tech_stack_recommendation"]
+      },
+      {
+        "agent_id": "designer-agent",
+        "endpoint": "http://localhost:9082/mcp",
+        "auth_type": "bearer_token",
+        "credentials": {
+          "username": "designer_service",
+          "password": "${DESIGNER_PASSWORD}",
+          "token": "${DESIGNER_TOKEN}"
+        },
+        "health_check": {
+          "endpoint": "http://localhost:9082/health",
+          "interval": 30,
+          "timeout": 5,
+          "retry_attempts": 3
+        },
+        "capabilities": ["ui_design", "design_systems", "user_experience", "branding"]
+      },
+      {
+        "agent_id": "coder-agent",
+        "endpoint": "http://localhost:9083/mcp",
+        "auth_type": "bearer_token",
+        "credentials": {
+          "username": "coder_service",
+          "password": "${CODER_PASSWORD}",
+          "token": "${CODER_TOKEN}"
+        },
+        "health_check": {
+          "endpoint": "http://localhost:9083/health",
+          "interval": 30,
+          "timeout": 5,
+          "retry_attempts": 3
+        },
+        "capabilities": ["code_generation", "implementation", "testing", "optimization"]
+      },
+      {
+        "agent_id": "auditor-agent",
+        "endpoint": "http://localhost:9084/mcp",
+        "auth_type": "bearer_token",
+        "credentials": {
+          "username": "auditor_service",
+          "password": "${AUDITOR_PASSWORD}",
+          "token": "${AUDITOR_TOKEN}"
+        },
+        "health_check": {
+          "endpoint": "http://localhost:9084/health",
+          "interval": 30,
+          "timeout": 5,
+          "retry_attempts": 3
+        },
+        "capabilities": ["code_review", "security_audit", "performance_analysis", "best_practices"]
+      },
+      {
+        "agent_id": "stack-research-agent",
+        "endpoint": "http://localhost:9085/mcp",
+        "auth_type": "bearer_token",
+        "credentials": {
+          "username": "research_service",
+          "password": "${RESEARCH_PASSWORD}",
+          "token": "${RESEARCH_TOKEN}"
+        },
+        "health_check": {
+          "endpoint": "http://localhost:9085/health",
+          "interval": 30,
+          "timeout": 5,
+          "retry_attempts": 3
+        },
+        "capabilities": ["technology_research", "stack_analysis", "trend_monitoring", "recommendation_engine"]
+      }
+    ],
+    "backend_integration": {
+      "api_base_url": "${BACKEND_API_URL}",
+      "auth_token": "${BACKEND_AUTH_TOKEN}",
+      "sync_interval": 60,
+      "timeout": 30000,
+      "retry_policy": {
+        "max_attempts": 3,
+        "backoff_multiplier": 2,
+        "initial_delay": 1000
+      },
+      "endpoints": {
+        "health": "/api/health",
+        "agents": "/api/agents",
+        "workflows": "/api/workflows",
+        "tasks": "/api/tasks",
+        "metrics": "/api/metrics"
+      }
+    },
+    "security": {
+      "encryption": {
+        "algorithm": "AES-256-GCM",
+        "key_rotation_interval": 86400,
+        "secure_key_storage": true
+      },
+      "network": {
+        "enable_https": true,
+        "certificate_validation": true,
+        "allowed_origins": ["http://localhost:*", "https://*.domain.com"]
+      },
+      "authentication": {
+        "token_expiry": 3600,
+        "refresh_token_expiry": 604800,
+        "max_failed_attempts": 5,
+        "lockout_duration": 900
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "format": "json",
+      "output": "stdout",
+      "rotation": {
+        "enabled": true,
+        "max_size": "100MB",
+        "max_files": 10,
+        "compress": true
+      },
+      "sensitive_fields": ["password", "token", "secret", "key"]
+    },
+    "performance": {
+      "max_concurrent_requests": 100,
+      "request_timeout": 30000,
+      "connection_pool_size": 50,
+      "rate_limiting": {
+        "enabled": true,
+        "requests_per_minute": 60,
+        "burst_allowance": 10
+      },
+      "caching": {
+        "enabled": true,
+        "ttl": 300,
+        "max_size": "1GB"
+      }
+    },
+    "resilience": {
+      "circuit_breaker": {
+        "enabled": true,
+        "failure_threshold": 5,
+        "recovery_timeout": 60,
+        "half_open_max_calls": 3
+      },
+      "bulkhead": {
+        "enabled": true,
+        "max_concurrent_calls": 25,
+        "max_wait_duration": 1000
+      },
+      "retry": {
+        "enabled": true,
+        "max_attempts": 3,
+        "wait_duration": 1000,
+        "retry_exceptions": ["NetworkException", "TimeoutException"]
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "environment": "production",
+    "last_updated": "2024-01-01T00:00:00Z",
+    "maintainer": "DevOps Team",
+    "documentation": "https://docs.blue-ai.enterprise/mcp",
+    "support": "support@blue-ai.enterprise"
+  }
+}

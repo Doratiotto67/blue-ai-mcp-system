@@ -1,0 +1,152 @@
+version: "3.9"
+
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.orchestrator
+    container_name: blue-orchestrator
+    ports:
+      - "9080:8080"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      MEMORY_AGENT_URL: http://memory-agent:8080
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - blue_agents
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      memory-agent:
+        condition: service_healthy
+
+  architect-agent:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.architect
+    container_name: architect-agent
+    ports:
+      - "9081:8080"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    networks:
+      - blue_agents
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  designer-agent:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.designer
+    container_name: designer-agent
+    ports:
+      - "9082:8080"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    networks:
+      - blue_agents
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  coder-agent:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.coder
+    container_name: coder-agent
+    ports:
+      - "9083:8080"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    networks:
+      - blue_agents
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  auditor-agent:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.auditor
+    container_name: auditor-agent
+    ports:
+      - "9084:8080"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    networks:
+      - blue_agents
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  stack-research-agent:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.stack-research
+    container_name: stack-research-agent
+    ports:
+      - "9085:8080"
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    networks:
+      - blue_agents
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+
+  memory-agent:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.memory
+    container_name: memory-agent
+    ports:
+      - "9086:8080"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - blue_agents
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  blue_agents:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

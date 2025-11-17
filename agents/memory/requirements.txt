@@ -1,0 +1,12 @@
+# Memory Agent Requirements
+# Base dependencies are installed via requirements-base.txt
+
+# Additional dependencies for memory agent (nenhuma no momento)
+
+# Futuro: integrações de banco vetorial e processamento
+# pgvector>=0.2.0
+# psycopg2-binary>=2.9.0
+# qdrant-client>=1.7.0
+# scikit-learn>=1.3.0
+# numpy>=1.24.0
+# redis>=5.0.0

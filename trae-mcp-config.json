@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "blue-orchestrator": {
+      "type": "streamable-http",
+      "url": "http://localhost:9080/mcp",
+      "autoConnect": true,
+      "retry": { "maxAttempts": 3, "initialDelayMs": 1000, "maxDelayMs": 10000 }
+    },
+    "blue-architect": {
+      "type": "streamable-http",
+      "url": "http://localhost:9081/mcp",
+      "autoConnect": true,
+      "retry": { "maxAttempts": 3, "initialDelayMs": 1000, "maxDelayMs": 10000 }
+    },
+    "blue-designer": {
+      "type": "streamable-http",
+      "url": "http://localhost:9082/mcp",
+      "autoConnect": true,
+      "retry": { "maxAttempts": 3, "initialDelayMs": 1000, "maxDelayMs": 10000 }
+    },
+    "blue-coder": {
+      "type": "streamable-http",
+      "url": "http://localhost:9083/mcp",
+      "autoConnect": true,
+      "retry": { "maxAttempts": 3, "initialDelayMs": 1000, "maxDelayMs": 10000 }
+    },
+    "blue-auditor": {
+      "type": "streamable-http",
+      "url": "http://localhost:9084/mcp",
+      "autoConnect": true,
+      "retry": { "maxAttempts": 3, "initialDelayMs": 1000, "maxDelayMs": 10000 }
+    },
+    "blue-stack-research": {
+      "type": "streamable-http",
+      "url": "http://localhost:9085/mcp",
+      "autoConnect": true,
+      "retry": { "maxAttempts": 3, "initialDelayMs": 1000, "maxDelayMs": 10000 }
+    }
+  },
+  "mcpGlobal": {
+    "timeout": 30000,
+    "logLevel": "info"
+  }
+}
